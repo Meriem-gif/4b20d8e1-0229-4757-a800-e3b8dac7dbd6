@@ -1,50 +1,49 @@
-import { Button } from "@mui/material";
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CardEvent from "../component/CardEvent/CardEvent";
-
+import Header from "../component/Header/Header";
 import "./Home.css";
 
-const Home = () => {
-
+const Home = ({searchWord, addItemToCart, cartItemsIds,removeItemFromCart}) => {
 
 const [event, setEvent] = useState([]);
+
+
 
   const fetchEvents = async () => {
     const { data } = await axios.get(
       `https://tlv-events-app.herokuapp.com/events/uk/london`
-    );
-    console.log(data.country);
-  
+    );  
     setEvent(data);
   };
 
   useEffect(()=>{
     fetchEvents();
-
   },[])
   return (
-    <div>
-      <Button variant="outlined" >
-      LONDON
-      </Button>
-     <Button variant="outlined" >
-      28.11.2021-10.12.2021
-     </Button>
-    <div className="Home">
-        {event && event.map((e)=>(
+   <>
+   <Header />
+    <div className="home">
+        {event && event.filter(e=>!cartItemsIds.includes(e._id)).filter(e=>e.title.toLowerCase().includes(searchWord.toLowerCase())).map((e,index)=>(
           <CardEvent 
-            key={e.id}
+            key={e._id}
+            id={e._id}
             img={e.flyerFront}
             title={e.title}
             date={e.date}
             startTime={e.startTime}
             endTime={e.endTime}
-            location={e.venue.name} id={undefined}          />
+            location={e.venue.name} 
+            locationDirection={e.venue.direction} 
+            addItemToCart={addItemToCart}
+            removeItemFromCart={removeItemFromCart}
+                    />
         ))}
       
     </div>
-    </div>
+    </>
+ 
   );
 };
 export default Home;

@@ -1,7 +1,6 @@
 .media{
     display: flex;
     flex-direction: column;
-    width: 300px;
     padding: 5px;
     margin: 5px;
     background-color: #f5f7fb;
@@ -12,6 +11,10 @@
 .media:hover{
     background-color: rgb(239, 234, 234);
     color:black;
+}
+.image{
+    width:100%;
+    height: auto;
 }
 
 .title{
