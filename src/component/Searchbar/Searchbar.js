@@ -56,12 +56,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const SearchBar = ({handleSearchWord}) => {
   const state = useContext(EventContext)
-
   let navigate = useNavigate();
+  
   const handelInput=(event)=>{
     event.preventDefault();
     handleSearchWord(event.target.value)
   }
+
    return (
    <AppBar position="sticky">
     <StyledToolbar>
@@ -81,11 +82,13 @@ const SearchBar = ({handleSearchWord}) => {
 
       </Box>
      
-     <IconButton onClick={()=>{
-      navigate("/cart")
-     }}>
-     <Badge badgeContent={state.cartItemsIds.length} color="error" >
-        <ShoppingCartOutlinedIcon />
+     <IconButton 
+      sx={{color:"white"}}
+      onClick={()=>{navigate("/cart")}}>
+     <Badge 
+     badgeContent={state.cartItemsIds.length} 
+     color="error" >
+    <ShoppingCartOutlinedIcon  />
       </Badge>
       </IconButton>
   

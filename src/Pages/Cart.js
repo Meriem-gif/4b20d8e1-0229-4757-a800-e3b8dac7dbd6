@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { EventContext } from "../App";
 import CardEvent from "../component/CardEvent/CardEvent";
-import "./Cart.css";
+import "./Cart.scss";
 
 const Cart = ({cart,removeItemFromCart,addItemToCart}) => {
 

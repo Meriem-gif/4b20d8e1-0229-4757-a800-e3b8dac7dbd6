@@ -5,7 +5,7 @@ import { Avatar, Box, CardActions, CardContent, CardHeader, CardMedia, IconButto
 import Card from '@mui/material/Card';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import './CardEvent.css';
+
 
 
 const CardEvent = ({id,img,title,date,startTime,endTime,location,locationDirection, addItemToCart,removeItemFromCart}) => {
@@ -16,17 +16,14 @@ const CardEvent = ({id,img,title,date,startTime,endTime,location,locationDirecti
 
   const handleClick = ()=>{
     const item = {id,img,title,date,startTime,endTime,location,locationDirection}
-    console.log("item from ce",item)
        pageLocation.pathname === ("/cart")? removeItemFromCart(item):addItemToCart(item)
   }
  
   return (
-
     <Card elevation={4} sx={{m:1}}>
       <CardHeader sx={{height:50}}
         avatar={
-          <Avatar sx={{ bgcolor:"red" }}>
-            R
+          <Avatar sx={{ bgcolor:"red" }}> 
           </Avatar>
         }
         title={
@@ -66,15 +63,8 @@ const CardEvent = ({id,img,title,date,startTime,endTime,location,locationDirecti
         <IconButton  onClick={handleClick} color="primary">
        { pageLocation.pathname === ("/cart")? <RemoveCircleIcon fontSize="large"/>:<AddCircleIcon fontSize='large'/>}
         </IconButton>
-       
-        
-    
-      </CardActions>
-      
-    </Card>
-
-   
-    
+      </CardActions>   
+    </Card>   
   );
 };
 export default CardEvent;

@@ -15,16 +15,12 @@ function App() {
   const [cartItemsIds, setCartItemsIds]=useState([]);
 
   const addItemToCart=(item)=>{
-    console.log(item)
     setCart([item,...cart]);
     setCartItemsIds([item.id,...cartItemsIds]);
 
   }
 
-  console.log("cart",cart)
-  console.log("cartItemids",cartItemsIds)
   const removeItemFromCart=(item)=>{
-    console.log(item)
     const newCart=cart.filter(i=>i.id!==item.id)
     setCart(newCart);
     const newItemsIds=cartItemsIds.filter(i=> item.id !== i)
