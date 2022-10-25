@@ -1,40 +1,44 @@
-import { Box } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CardEvent from "../component/CardEvent/CardEvent";
 import Header from "../component/Header/Header";
 import "./Home.scss";
-
 const Home = ({searchWord, addItemToCart, cartItemsIds,removeItemFromCart}) => {
 
-const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState([]);
 
   const fetchEvents = async () => {
-    const { data } = await axios.get(
-      `https://tlv-events-app.herokuapp.com/events/uk/london`
-    );  
-    setEvent(data);
-  };
+    const {data}  = await axios.get(`https://tlv-events-app.herokuapp.com/events/uk/london`)  
+      setEvent(data);
+   };
 
   useEffect(()=>{
     fetchEvents();
-  },[])
-  console.log(cartItemsIds)
-    
+  },[]);
+
+  const groupBy = (arr, criteria) =>
+  arr.reduce((obj, item) => {
+      let key = typeof criteria === "function" ? criteria(item) : item[criteria];
+      if (!obj.hasOwnProperty(key)) obj[key] = [];
+      obj[key].push(item);
+      return obj;
+  }, {});
+  const grouped= groupBy(event,"date");
+  Object.keys(grouped).map(k => console.log(grouped[k]));
+
+  
   return (
    <>
    <Header />
    <div >
-    <Box sx={{position:"sticky"}}>
-     <h1>Public Events</h1>
-    </Box>
+     <h1>Public Events</h1> 
    </div>
     <div className="home">
-        {event && event
+      {event && event
         .filter(e=>!cartItemsIds.includes(e._id))
         .filter(e=>e.title.toLowerCase().includes(searchWord.toLowerCase()))
         .sort((a,b)=>Number(new Date(a.date)) - Number(new Date(b.date)))
-        .map((e,index)=>(
+        .map((e)=>(
           <CardEvent 
             key={e._id}
             id={e._id}
@@ -49,6 +53,7 @@ const [event, setEvent] = useState([]);
             removeItemFromCart={removeItemFromCart}
                     />
         ))}
+
       
     </div>
     </>

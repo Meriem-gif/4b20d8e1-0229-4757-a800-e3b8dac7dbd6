@@ -91,7 +91,6 @@ const SearchBar = ({handleSearchWord}) => {
     <ShoppingCartOutlinedIcon  />
       </Badge>
       </IconButton>
-  
     </StyledToolbar>
    </AppBar>
 
