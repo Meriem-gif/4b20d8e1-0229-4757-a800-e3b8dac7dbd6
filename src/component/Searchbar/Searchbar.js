@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { EventContext } from '../../App';
 
-
+//Searchbar styling with mui
 const StyledToolbar=styled(Toolbar)({
   display:"flex",
   justifyContent:"space-between",

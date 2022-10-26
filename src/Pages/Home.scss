@@ -5,6 +5,26 @@
     margin-top: 20px;
 }
 
-.home > * {
-    flex-basis:28%
+.group{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    
+}
+
+.sticky{
+  flex: 1 100%;
+  position:sticky;
+  top:70px;
+  height:50px;
+}
+.onScroll{
+    display:flex;
+    align-items: center;
+    padding-left:12px;
+    background-color: rgba(224, 215, 215, 0.7);
+}
+
+.group .card {
+    flex:0 1 30%
 }

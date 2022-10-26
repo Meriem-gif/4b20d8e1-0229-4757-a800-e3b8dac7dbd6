@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CardEvent from "../component/CardEvent/CardEvent";
@@ -15,6 +16,20 @@ const Home = ({searchWord, addItemToCart, cartItemsIds,removeItemFromCart}) => {
   useEffect(()=>{
     fetchEvents();
   },[]);
+   
+useEffect(()=>{
+  const scrollFunction = ()=>{
+    document.querySelectorAll(".sticky").forEach(e => {
+      if(e.getBoundingClientRect().bottom <=150){
+        e.classList.add("onScroll")
+      }
+      else{
+        e.classList.remove("onScroll")
+      }
+    })}
+  document.addEventListener("scroll",scrollFunction)
+
+},[])
 
   const groupBy = (arr, criteria) =>
   arr.reduce((obj, item) => {
@@ -24,7 +39,8 @@ const Home = ({searchWord, addItemToCart, cartItemsIds,removeItemFromCart}) => {
       return obj;
   }, {});
   const grouped= groupBy(event,"date");
-  Object.keys(grouped).map(k => console.log(grouped[k]));
+ 
+  const dates=Object.keys(grouped).sort((a,b)=>Number(new Date(a)) - Number(new Date(b)));
 
   
   return (
@@ -34,27 +50,29 @@ const Home = ({searchWord, addItemToCart, cartItemsIds,removeItemFromCart}) => {
      <h1>Public Events</h1> 
    </div>
     <div className="home">
-      {event && event
-        .filter(e=>!cartItemsIds.includes(e._id))
+      {event && dates.map(d =>(
+        <div className="group">
+         <Typography className="sticky" variant="h5" color="primary" >{ d.split('T').join (", ").split('.')[0].split(',')[0]}</Typography>
+         {grouped[d].filter(e=>!cartItemsIds.includes(e._id))
         .filter(e=>e.title.toLowerCase().includes(searchWord.toLowerCase()))
-        .sort((a,b)=>Number(new Date(a.date)) - Number(new Date(b.date)))
         .map((e)=>(
-          <CardEvent 
-            key={e._id}
-            id={e._id}
-            img={e.flyerFront}
-            title={e.title}
-            date={e.date}
-            startTime={e.startTime}
-            endTime={e.endTime}
-            location={e.venue.name} 
-            locationDirection={e.venue.direction} 
-            addItemToCart={addItemToCart}
-            removeItemFromCart={removeItemFromCart}
-                    />
-        ))}
-
+                  <CardEvent 
+                    key={e._id}
+                    id={e._id}
+                    img={e.flyerFront}
+                    title={e.title}
+                    date={e.date}
+                    startTime={e.startTime}
+                    endTime={e.endTime}
+                    location={e.venue.name} 
+                    locationDirection={e.venue.direction} 
+                    addItemToCart={addItemToCart}
+                    removeItemFromCart={removeItemFromCart}
+                            />))}
+        
+        </div>
       
+      ))}  
     </div>
     </>
  

@@ -9,14 +9,14 @@ const Header = () => {
 
     <Box sx={{display:"flex",gap:2,mt:2,alignItems:"center"}}>
       <Chip
-     label="LONDON"
-     avatar={<Avatar alt="UK" src="src/united-kingdom-flag-icon.svg" />}
-     variant="outlined"
-      />
+        label="LONDON"
+        avatar={<Avatar alt="UK" src="src/united-kingdom-flag-icon.svg" />}
+        variant="outlined"
+       />
     
-     <Chip
-     label="28.11.2021-10.12.2021"
-     variant="outlined"
+      <Chip
+        label="28.11.2021-10.12.2021"
+        variant="outlined"
       />
     </Box>
   );

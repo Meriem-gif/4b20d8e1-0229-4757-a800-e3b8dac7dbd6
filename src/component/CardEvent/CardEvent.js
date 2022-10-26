@@ -20,7 +20,7 @@ const CardEvent = ({id,img,title,date,startTime,endTime,location,locationDirecti
   }
  
   return (
-    <Card elevation={4} sx={{m:1}}>
+    <Card className='card' elevation={4} sx={{m:1}}>
       <CardHeader sx={{height:50}}
         avatar={
           <Avatar sx={{ bgcolor:"red" }}> 

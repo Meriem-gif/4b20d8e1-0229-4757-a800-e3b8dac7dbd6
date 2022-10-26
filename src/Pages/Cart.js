@@ -6,8 +6,6 @@ import "./Cart.scss";
 const Cart = ({cart,removeItemFromCart,addItemToCart}) => {
 
  const state = useContext(EventContext)
- console.log(state);
- 
   return (
   
     <div className="cart">
